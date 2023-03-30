@@ -14,4 +14,16 @@ router.post(
   blogController.createBlogPost
 );
 
+router.get(`/posts`, blogController.getAllBlogPost);
+router.get(`/post/:postId`, blogController.getBlogPostById);
+router.put(
+  `/post/:postId`,
+  [
+    body(`title`).isLength({ min: 5 }).withMessage(`title tidak sesuai`),
+    body(`body`).isLength({ min: 5 }).withMessage(`body tidak sesuai`),
+  ],
+  blogController.updateBlogPost
+);
+router.delete(`/post/:postId`, blogController.deletBlogPost);
+
 module.exports = router;
